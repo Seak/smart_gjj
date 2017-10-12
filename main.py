@@ -13,7 +13,7 @@ def get_account():
             'name': ws.cell_value(x, 0),
             'sfzh': ws.cell_value(x, 1),
             'mm': ws.cell_value(x, 2)}
-        )
+            )
     return account
 
 
@@ -24,7 +24,7 @@ def cx(name, sfzh, mm):
         'http://wx.zzgjj.com/pcweb/pcchaxun/chaxun',
         data={'name': name, 'sfzh': sfzh, 'mm': mm},
         headers={'referer': 'http://wx.zzgjj.com/pcweb/pcchaxun/chaxun'}
-    )
+        )
     tree = html.fromstring(result.content)
     elems = tree.findall(".//div[@class='cx']/")
     if elems:
@@ -50,7 +50,10 @@ def main():
         info += cx(x['name'], x['sfzh'], x['mm'])
     wb = xlwt.Workbook()
     ws = wb.add_sheet('查询结果', cell_overwrite_ok=True)
-    ws_hd = ['公积金账户', '单位信息', '开户日期', '缴存人姓名', '缴存基数', '月缴额', '个人缴存比例', '单位缴存比例', '缴存余额', '缴至月份', '缴存状态']
+    ws_hd = [
+        '公积金账户', '单位信息', '开户日期', '缴存人姓名', '缴存基数',
+        '月缴额', '个人缴存比例', '单位缴存比例', '缴存余额', '缴至月份', '缴存状态'
+        ]
     for x in range(len(info)):
         for y in range(len(ws_hd)):
             if x == 0:
